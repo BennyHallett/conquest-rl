@@ -9,11 +9,15 @@ class TitleScreen
     @exit_command = TextWidget.new 20, 21, 'Press the "x" key to exit'
   end
 
-  def draw(display)
+  def render(display)
     @title.draw display
     @subtitle.draw display
     @start_command.draw display
     @exit_command.draw display
+  end
+
+  def partial?
+    false
   end
 
 end

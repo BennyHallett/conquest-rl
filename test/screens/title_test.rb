@@ -22,7 +22,11 @@ class TitleScreenTest < Minitest::Test
 
   def test_drawing_screen
     @display.expects(:draw).times(112)
-    @title.draw @display
+    @title.render @display
+  end
+
+  def test_title_screen_isnt_partial
+    assert !@title.partial?
   end
 
 end

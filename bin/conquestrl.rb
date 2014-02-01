@@ -12,8 +12,10 @@ end
 
 display = Display.new CursesRenderer.new
 title_screen = TitleScreen.new
+screen_manager = ScreenManager.new
+screen_manager.push_screen title_screen
 
-title_screen.draw
+screen_manager.render display
 display.render
 
 sleep 3
