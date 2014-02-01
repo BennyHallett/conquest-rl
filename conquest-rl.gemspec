@@ -1,15 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'conquest/rl/version'
+require 'conquest/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "conquest-rl"
-  spec.version       = Conquest::Rl::VERSION
+  spec.version       = Conquest::VERSION
   spec.authors       = ["BennyHallett"]
-  spec.email         = ["benny.hallett@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{A roguelike inspired by Mount and Blade, Dwarf Fortress and DCSS}
+  spec.summary       = %q{Conquest Roguelike}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_runtime_dependency     "delve", "~> 0.0.1"
 end
