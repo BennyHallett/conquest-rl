@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'mocha'
-  spec.add_runtime_dependency     "delve", "~> 0.0.1"
+  spec.add_runtime_dependency     "delve", "~> 0.0.2"
 end
