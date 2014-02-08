@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
-
 require 'optparse'
+
 require 'delve/display/curses_renderer'
 require 'delve/display/display'
+require 'delve/input/input'
+require 'delve/input/curses_input'
 require 'delve/screen_manager'
+require 'delve/game'
+
 require 'conquest/screens/title'
 
 options = {}
@@ -14,10 +18,9 @@ display = Display.new CursesRenderer.new
 title_screen = TitleScreen.new
 screen_manager = ScreenManager.new
 screen_manager.push_screen title_screen
+input = Input.new CursesInput.new
 
-screen_manager.render display
-display.render
-
-sleep 3
+game = Game.new display, screen_manager, input
+game.start
 
 display.exit
