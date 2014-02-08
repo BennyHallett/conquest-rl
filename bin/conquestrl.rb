@@ -15,8 +15,8 @@ option_parser = OptionParser.new do |opts|
 end
 
 display = Display.new CursesRenderer.new
-title_screen = TitleScreen.new
 screen_manager = ScreenManager.new
+title_screen = TitleScreen.new screen_manager
 screen_manager.push_screen title_screen
 input = Input.new CursesInput.new
 

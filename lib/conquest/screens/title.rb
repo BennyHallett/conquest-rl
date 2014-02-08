@@ -1,9 +1,11 @@
-require 'delve/widgets/text'
+require 'delve/widgets/menu'
 require 'delve/widgets/multi_line'
+
+require 'conquest/screens/loading'
 
 class TitleScreen
 
-  def initialize
+  def initialize(screen_manager)
     @title = MultiLineWidget.new :center, 1, [
 ' .d8888b.                                                        888    ',
 'd88P  Y88b                                                       888    ',
@@ -17,17 +19,17 @@ class TitleScreen
 '                                  888         R O G U E L I K E         ',
 '                                  888         =================         '
     ]
-  
-    @subtitle = TextWidget.new :center, 15, 'Build yourself, build your army, conquer the world'
-    @start = TextWidget.new :center, 17, 'Press any key to begin'
+    
+    @menu = MenuWidget.new 1, 15, {
+      'n' => 'New game',
+      'x' => 'Exit'
+    }
+    @manager = screen_manager
   end
 
   def render(display)
     @title.draw display
-    @subtitle.draw display
-    @start.draw display
-
-    display.render
+    @menu.draw display
   end
 
   def partial?
@@ -35,8 +37,18 @@ class TitleScreen
   end
 
   def update(input)
-    input.wait_for_input
-    true
+    input = input.wait_for_input
+    
+    @menu.next if input == :down_arrow
+    @menu.prev if input == :up_arrow
+    
+    @menu.select(input)
+    
+    if @menu.selected_item == 'New game'
+      @manager.push_screen LoadingScreen.new(@manager)
+    end
+
+    @menu.selected_item == 'Exit'
   end
 
 end
