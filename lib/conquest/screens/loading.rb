@@ -1,4 +1,7 @@
 require 'delve/widgets/text'
+require 'delve/generator/noise'
+
+require 'conquest/world'
 
 class LoadingScreen
 
@@ -6,6 +9,7 @@ class LoadingScreen
     @manager = screen_manager
     @text = TextWidget.new :center, :center, 'Creating world...'
     @state = :world
+    @world = nil
   end
 
   def render(display)
@@ -18,8 +22,7 @@ class LoadingScreen
 
   def update(input)
     if @state == :world
-      # Create world
-      sleep 3
+      @world = World.new(Noise.new(512, 384, :fine))
       @state = :civilisations 
       @text = TextWidget.new :center, :center, 'Founding civilisations...'
     elsif @state == :civilisations
