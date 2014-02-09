@@ -2,26 +2,27 @@ require 'minitest'
 require 'minitest/autorun'
 require 'mocha/setup'
 require 'conquest/screens/title'
-require 'delve/widgets/text'
+require 'delve/widgets/multi_line'
+require 'delve/widgets/menu'
 
 class TitleScreenTest < Minitest::Test
 
   def setup
-    @title = TitleScreen.new
+    @screen_manager = mock('object')
+    @title = TitleScreen.new(@screen_manager)
     @display = mock('object')
   end
 
   def test_initialize_creates_widgets
-    TextWidget.expects(:new).with(1, 1, 'Conquest RL')
-    TextWidget.expects(:new).with(1, 2, 'Build yourself, build your army, conquer the world')
-    TextWidget.expects(:new).with(20, 20, 'Press the "n" key to begin')
-    TextWidget.expects(:new).with(20, 21, 'Press the "x" key to exit')
+    MultiLineWidget.expects(:new)
+    MenuWidget.expects(:new)
 
-    TitleScreen.new
+    TitleScreen.new @screen_manager
   end
 
   def test_drawing_screen
-    @display.expects(:draw).times(112)
+    @display.expects(:width).times(11).returns(100)
+    @display.expects(:draw).times(804)
     @title.render @display
   end
 
