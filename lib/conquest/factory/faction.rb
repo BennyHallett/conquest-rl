@@ -8,6 +8,8 @@ class FactionFactory
   end
 
   def create
+    raise 'Cannot create any more factions. Limit reached' if @colors.empty?
+
     Faction.new @name.generate, @colors.shift
   end
 

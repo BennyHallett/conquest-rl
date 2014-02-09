@@ -32,10 +32,18 @@ class FactionFactoryTest < Minitest::Test
     assert_equal :blue, huns.color
     assert_equal 'Mongols', mongols.name
     assert_equal :red, mongols.color
-    
   end
 
-  # test only X (6?) factions can be generated?
+  def test_6_max_factions
+    @names.expects(:generate).times(6).returns('Name')
+    (0..5).each do
+      @factory.create
+    end
+
+    assert_raises RuntimeError do
+      @factory.create
+    end
+  end
   # test bulk generation
   # test cant bulk gen 9 factions
 
