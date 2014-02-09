@@ -44,7 +44,27 @@ class FactionFactoryTest < Minitest::Test
       @factory.create
     end
   end
-  # test bulk generation
-  # test cant bulk gen 9 factions
+
+  def test_bulk_generate_3_factions
+    @names.expects(:generate).times(3).returns('Egyptians').returns('Greeks').returns('Romans')
+    factions = @factory.create 3
+
+    assert_equal 3, factions.length
+    assert_faction factions[0], 'Egyptians', :blue
+    assert_faction factions[1], 'Greeks', :red
+    assert_faction factions[2], 'Romans', :green
+  end
+
+  def test_cant_generate_more_factions_than_remains
+    assert_raises RuntimeError do
+      @factory.create 7
+    end
+  end
+
+  private
+  def assert_faction(faction, name, color)
+    assert_equal name, faction.name
+    assert_equal color, faction.color
+  end
 
 end
