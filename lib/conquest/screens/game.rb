@@ -2,9 +2,10 @@ require 'delve/widgets/border'
 
 class GameScreen
 
-  def initialize(world, screen_manager)
+  def initialize(world, player, screen_manager)
     @world = world
     @manager = screen_manager
+    @player = player
     @boundary = nil
     @game_border = nil
   end
@@ -22,6 +23,10 @@ class GameScreen
         display.draw(x, y, tile[:char], tile[:color], :black)
       end
     end
+
+    x = @player.get(:position).x
+    y = @player.get(:position).y
+    display.draw x+2, y+1, '@'
   end
 
   def partial?
@@ -30,6 +35,14 @@ class GameScreen
 
   def update(input)
     input = input.wait_for_input
+
+    move = @player.get(:movement)
+
+    move.north if input == 'k'
+    move.south if input == 'j'
+    move.east if input == 'l'
+    move.west if input == 'h'
+
     input == 'x'
   end
 

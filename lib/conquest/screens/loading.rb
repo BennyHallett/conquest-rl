@@ -3,6 +3,7 @@ require 'delve/generator/noise'
 
 require 'conquest/world'
 require 'conquest/factory/faction'
+require 'conquest/factory/player'
 require 'conquest/generator/names'
 require 'conquest/screens/game'
 
@@ -12,8 +13,10 @@ class LoadingScreen
     @manager = screen_manager
     @text = TextWidget.new :center, :center, 'Creating world (this may take a while)'
     @faction_factory = FactionFactory.new NameGenerator.new
+    @player_factory = PlayerFactory.new
     @state = :world
     @world = nil
+    @player = nil
   end
 
   def render(display)
@@ -38,12 +41,12 @@ class LoadingScreen
       @state = :hero
       @text = TextWidget.new :center, :center, 'Locating hero'
     elsif @state == :hero
-      sleep 1
+      @player = @player_factory.create
       @state = :done
       @text = TextWidget.new :center, :center, 'Done. Press any key to continue'
     else
       input = input.wait_for_input
-      @manager.push_screen GameScreen.new(@world, @manager)
+      @manager.push_screen GameScreen.new(@world, @player, @manager)
     end
     false
   end
