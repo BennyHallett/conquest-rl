@@ -42,6 +42,10 @@ class GameScreen
     move.south if input == 'j'
     move.east if input == 'l'
     move.west if input == 'h'
+    move.north_east if input == 'u'
+    move.north_west if input == 'y'
+    move.south_east if input == 'n'
+    move.south_west if input == 'b'
 
     input == 'x'
   end
