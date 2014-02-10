@@ -26,7 +26,4 @@ class WorldTest < Minitest::Test
     assert @world.at(1, 1) != 0
   end
 
-  # test generate towns/etc for (array of) factions
-  # 
-
 end

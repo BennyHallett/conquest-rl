@@ -13,6 +13,10 @@ class World
     @world[key_for(x, y)]
   end
 
+  def build_civilizations(count=4)
+
+  end
+
   private
   def key_for(x, y)
     "#{x},#{y}"
