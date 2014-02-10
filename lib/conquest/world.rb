@@ -31,7 +31,7 @@ class World
     c = :cyan if v < 3
     c = :blue if v < 1
 
-    { char: t, color: c, walkable: v < 7 and v >= 3 }
+    { char: t, color: c, walkable: (v < 7 and v >= 3) }
   end
 
 end

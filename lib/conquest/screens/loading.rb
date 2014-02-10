@@ -35,6 +35,10 @@ class LoadingScreen
       @text = TextWidget.new :center, :center, 'Growing the population'
     elsif @state == :population
       sleep 1
+      @state = :hero
+      @text = TextWidget.new :center, :center, 'Locating hero'
+    elsif @state == :hero
+      sleep 1
       @state = :done
       @text = TextWidget.new :center, :center, 'Done. Press any key to continue'
     else
