@@ -10,4 +10,8 @@ class CollisionComponent
   def id
     :collision
   end
+
+  def free(x, y)
+    @world.free(x, y)
+  end
 end
