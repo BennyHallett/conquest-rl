@@ -7,12 +7,19 @@ class CollisionComponentTest < Minitest::Test
 
   def setup
     @parent = mock('object')
-    @pos = CollisionComponent.new @parent
+    @world = mock('object')
+    @pos = CollisionComponent.new @parent, @world
   end
 
   def test_initialize_component_with_nil_parent_fails
     assert_raises RuntimeError do
-      PositionComponent.new nil
+      CollisionComponent.new nil, @world
+    end
+  end
+
+  def test_initialize_component_with_nil_world_fails
+    assert_raises RuntimeError do
+      CollisionComponent.new @parent, nil
     end
   end
 

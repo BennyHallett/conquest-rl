@@ -1,7 +1,10 @@
 class CollisionComponent
-  def initialize(parent)
-    raise 'Cannot create position comonent when parent is nil' unless parent
+  def initialize(parent, world)
+    raise 'Cannot create collision component when parent is nil' unless parent
+    raise 'Cannot create collision component when world is nil' unless world
+
     @parent = parent
+    @world = world
   end
 
   def id
