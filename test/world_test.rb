@@ -26,4 +26,8 @@ class WorldTest < Minitest::Test
     assert @world.at(1, 1) != 0
   end
 
+  def test_there_are_originally_0_entities
+    assert_equal 0, @world.entities.length
+  end
+
 end

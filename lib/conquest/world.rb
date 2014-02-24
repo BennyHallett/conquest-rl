@@ -4,6 +4,7 @@ class World
     raise 'Cannot create world when generator is nil' unless generator
 
     @world = Hash.new
+    @entities = Hash.new
     generator.generate do |x, y, height|
       @world[key_for(x.floor, y.floor)] = tile_for_height(height)
     end
@@ -11,6 +12,10 @@ class World
 
   def at(x, y)
     @world[key_for(x, y)]
+  end
+
+  def entities
+    @entities
   end
 
   private
