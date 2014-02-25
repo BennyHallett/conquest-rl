@@ -26,8 +26,29 @@ class WorldTest < Minitest::Test
     assert @world.at(1, 1) != 0
   end
 
-  def test_there_are_originally_0_entities
-    assert_equal 0, @world.entities.length
+  def test_add_entity_places_it_at_1_1
+    entity = mock('object')
+    position = mock('object')
+    position.expects(:x).returns(1)
+    position.expects(:y).returns(1)
+    symbol = mock('object')
+    symbol.expects(:symbol).returns('@')
+    entity.expects(:has?).with(:position).returns(true)
+    entity.expects(:has?).with(:symbol).returns(true)
+    entity.expects(:get).with(:position).returns(position)
+    entity.expects(:get).with(:symbol).returns(symbol)
+
+    @world.add_entity entity
+    assert_equal '@', @world.at(1, 1)
+  end
+
+  def test_add_entity_with_no_position_fails
+    entity = mock('object')
+    entity.expects(:has?).with(:position).returns(false)
+
+    assert_raises RuntimeError do
+      @world.add_entity entity
+    end
   end
 
 end

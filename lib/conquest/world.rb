@@ -11,11 +11,20 @@ class World
   end
 
   def at(x, y)
+    key = key_for(x, y)
+    entity = @entities[key]
+    return entity.get(:symbol).symbol if entity and entity.has?(:symbol)
     @world[key_for(x, y)]
   end
 
   def entities
     @entities
+  end
+
+  def add_entity(entity)
+    raise 'Cannot add entity that doesnt have a position' unless entity.has? :position
+    pos = entity.get :position
+    @entities[key_for(pos.x, pos.y)] = entity
   end
 
   private
