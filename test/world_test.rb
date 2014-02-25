@@ -55,12 +55,12 @@ class WorldTest < Minitest::Test
 
   def test_free_tile
     @world.expects(:at).with(1, 1).returns({ :walkable => true })
-    assert @world.free?(1, 1)
+    assert @world.free(1, 1)
   end
 
   def test_not_free_tile
     @world.expects(:at).with(1, 1).returns({ :walkable => false })
-    assert !@world.free?(1, 1)
+    assert !@world.free(1, 1)
   end
 
 end

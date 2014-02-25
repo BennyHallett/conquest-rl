@@ -13,7 +13,6 @@ class LoadingScreen
     @manager = screen_manager
     @text = TextWidget.new :center, :center, 'Creating world (this may take a while)'
     @faction_factory = FactionFactory.new NameGenerator.new
-    @player_factory = PlayerFactory.new
     @state = :world
     @world = nil
     @player = nil
@@ -41,7 +40,7 @@ class LoadingScreen
       @state = :hero
       @text = TextWidget.new :center, :center, 'Locating hero'
     elsif @state == :hero
-      @player = @player_factory.create
+      @player = PlayerFactory.new.create @world
       @state = :done
       @text = TextWidget.new :center, :center, 'Done. Press any key to continue'
     else
