@@ -15,8 +15,11 @@ class World
   def at(x, y)
     key = key_for(x, y)
     entity = @entities[key]
-    return entity.get(:symbol).symbol if entity and entity.has?(:symbol)
-    @world[key_for(x, y)]
+    if entity and entity.has?(:symbol)
+      return entity.get(:symbol).symbol
+    else
+      return @world[key_for(x, y)]
+    end
   end
 
   def entities
