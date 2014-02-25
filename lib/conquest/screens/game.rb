@@ -26,7 +26,6 @@ class GameScreen
     x = @player.get(:position).x
     y = @player.get(:position).y
     @viewport.focus(x, y)
-
     @viewport.draw display
   end
 

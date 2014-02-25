@@ -8,6 +8,8 @@ class WorldTest < Minitest::Test
   def setup
     @generator = mock('object')
     @generator.stubs(:generate)
+    @generator.stubs(:width).returns(100)
+    @generator.stubs(:height).returns(100)
     @world = World.new @generator
   end
 
@@ -49,6 +51,16 @@ class WorldTest < Minitest::Test
     assert_raises RuntimeError do
       @world.add_entity entity
     end
+  end
+
+  def test_free_tile
+    @world.expects(:at).with(1, 1).returns({ :walkable => true })
+    assert @world.free?(1, 1)
+  end
+
+  def test_not_free_tile
+    @world.expects(:at).with(1, 1).returns({ :walkable => false })
+    assert !@world.free?(1, 1)
   end
 
 end

@@ -5,6 +5,8 @@ class World
 
     @world = Hash.new
     @entities = Hash.new
+    @width = generator.width
+    @height = generator.height
     generator.generate do |x, y, height|
       @world[key_for(x.floor, y.floor)] = tile_for_height(height)
     end
@@ -25,6 +27,18 @@ class World
     raise 'Cannot add entity that doesnt have a position' unless entity.has? :position
     pos = entity.get :position
     @entities[key_for(pos.x, pos.y)] = entity
+  end
+
+  def width
+    @width
+  end
+
+  def height
+    @height
+  end
+
+  def free?(x, y)
+    at(x, y)[:walkable]
   end
 
   private
