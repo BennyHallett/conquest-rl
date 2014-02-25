@@ -10,6 +10,8 @@ class GameScreen
     @boundary = nil
     @game_border = nil
     @viewport = nil
+
+    @world.add_entity @player
   end
 
   def render(display)
