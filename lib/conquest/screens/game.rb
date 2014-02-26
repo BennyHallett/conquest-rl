@@ -22,7 +22,6 @@ class GameScreen
     @boundary.draw display
     @game_border.draw display
 
-
     x = @player.get(:position).x
     y = @player.get(:position).y
     @viewport.focus(x, y)
@@ -35,7 +34,6 @@ class GameScreen
 
   def update(input)
     input = input.wait_for_input
-
     move = @player.get(:movement)
 
     move.north if input == 'k'

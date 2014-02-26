@@ -41,6 +41,7 @@ class LoadingScreen
       @text = TextWidget.new :center, :center, 'Locating hero'
     elsif @state == :hero
       @player = PlayerFactory.new.create @world
+      randomize_player_location
       @state = :done
       @text = TextWidget.new :center, :center, 'Done. Press any key to continue'
     else
@@ -48,6 +49,19 @@ class LoadingScreen
       @manager.push_screen GameScreen.new(@world, @player, @manager)
     end
     false
+  end
+
+  private
+  def randomize_player_location
+    rx = (rand * @world.width).floor
+    ry = (rand * @world.height).floor
+
+    while !@world.free(rx, ry)
+      rx = (rand * @world.width).floor
+      ry = (rand * @world.height).floor
+    end
+
+    @player.get(:position).set(rx, ry)
   end
 
 end
