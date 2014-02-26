@@ -37,7 +37,7 @@ class WorldTest < Minitest::Test
     symbol.expects(:symbol).returns('@')
     entity.expects(:has?).with(:position).returns(true)
     entity.expects(:has?).with(:symbol).returns(true)
-    entity.expects(:get).with(:position).returns(position)
+    entity.expects(:get).with(:position).twice.returns(position)
     entity.expects(:get).with(:symbol).returns(symbol)
 
     @world.add_entity entity

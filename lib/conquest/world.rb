@@ -4,7 +4,7 @@ class World
     raise 'Cannot create world when generator is nil' unless generator
 
     @world = Hash.new
-    @entities = Hash.new
+    @entities = Array.new
     @width = generator.width
     @height = generator.height
     generator.generate do |x, y, height|
@@ -14,7 +14,9 @@ class World
 
   def at(x, y)
     key = key_for(x, y)
-    entity = @entities[key]
+    # This is super inefficient
+    found = @entities.select { |e| e.get(:position).x == x and e.get(:position).y == y }
+    entity = found.first
     if entity and entity.has?(:symbol)
       return entity.get(:symbol).symbol
     else
@@ -28,8 +30,7 @@ class World
 
   def add_entity(entity)
     raise 'Cannot add entity that doesnt have a position' unless entity.has? :position
-    pos = entity.get :position
-    @entities[key_for(pos.x, pos.y)] = entity
+    @entities << entity
   end
 
   def width
